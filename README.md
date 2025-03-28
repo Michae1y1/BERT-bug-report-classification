@@ -1,7 +1,9 @@
 
 # 🧠 BERT-based Bug Report Classification
 
-This project implements a bug report classification system using BERT (via HuggingFace Transformers) and compares it with a baseline Naive Bayes + TF-IDF model. It was developed as part of the *Intelligent Software Engineering* coursework at the University of Birmingham.
+This project implements a bug report classification system using a fine-tuned BERT model (via HuggingFace Transformers) and compares it with a baseline Naive Bayes + TF-IDF model. A parameter sensitivity analysis is also included to study model performance under different training configurations.
+
+Developed for the **Intelligent Software Engineering** module at the University of Birmingham.
 
 ---
 
@@ -9,19 +11,19 @@ This project implements a bug report classification system using BERT (via Huggi
 
 ```
 BERT/
-├── BERT.py                             # BERT classification using Transformers
-├── NB+TF-IDF.py                        # Baseline model: Naive Bayes + TF-IDF
-├── Sensitivity Analysis of Parameters.py  # Hyperparameter sensitivity test
+├── BERT.py                             # BERT classifier using Transformers + PyTorch
+├── NB+TF-IDF.py                        # Baseline model using Naive Bayes + TF-IDF
+├── Sensitivity Analysis of Parameters.py  # Script for parameter sensitivity test
 ├── Title+Body.csv                      # Dataset with 'text' and 'sentiment' columns
 │
-├── requirements.txt                    # Python dependencies
-├── requirements.pdf                    # PDF version of the dependency list
-├── manual.pdf                          # Project usage guide
-├── replication.pdf                     # Replication guide for the experiments
+├── requirements.txt                    # Dependency list (text)
+├── requirements.pdf                    # Dependency explanation (PDF)
+├── manual.pdf                          # General user manual
+├── replication.pdf                     # Full replication guide
 │
-├── README for NB+TF-IDF.md             # Markdown guide for the NB model
-├── datasets/                           # (Optional) Additional datasets
-└── results/                            # Directory for model outputs
+├── README for NB+TF-IDF.md             # Markdown guide for NB+TF-IDF model
+├── datasets/                           # Additional datasets (if any)
+└── results/                            # Outputs from all models
 ```
 
 ---
@@ -41,67 +43,118 @@ cd BERT-bug-report-classification
 pip install -r requirements.txt
 ```
 
+**Python ≥ 3.8 is recommended**
+
 ---
 
 ## 📄 Dataset Format
 
-Ensure `Title+Body.csv` exists in the project root and includes:
+Make sure the file `Title+Body.csv` is located in the project root and includes:
 
-- `text`: Combined title + body of the bug report
-- `sentiment`: Integer label (e.g., 0 = negative, 1 = positive)
+- `text`: Combined bug report title and body
+- `sentiment`: Integer label (0 or 1)
 
-Missing values will be replaced with empty strings.
+Empty values will automatically be filled with `''` during preprocessing.
 
 ---
 
 ## 🚀 How to Run
 
-### BERT Classification
+### Run BERT Classification
 
 ```bash
 python BERT.py
 ```
 
 - Fine-tunes `bert-base-uncased`
-- Performs multiple runs (default: 10)
-- Saves average evaluation metrics to `pytorch_BERT.csv`
+- Repeats training and evaluation (default = 10 times)
+- Computes: Accuracy, Precision, Recall, F1, AUC
+- Saves output to: `pytorch_BERT.csv`
 
-### Naive Bayes + TF-IDF
+### Run Naive Bayes + TF-IDF Baseline
 
 ```bash
 python "NB+TF-IDF.py"
 ```
 
-### Sensitivity Analysis
+- Runs the same dataset using a classic TF-IDF + Naive Bayes model
+- Output: `pytorch_NB.csv`
+
+### Run Parameter Sensitivity Analysis
 
 ```bash
 python "Sensitivity Analysis of Parameters.py"
 ```
 
----
-
-## 📊 Output
-
-- Evaluation metrics: Accuracy, Precision, Recall, F1-score, AUC
-- Output file: `pytorch_BERT.csv` or files under `results/`
+- Tests various values for learning rate, batch size, epochs, and threshold
+- Output: `pytorch_BERT_sensitivity.csv`
 
 ---
 
-## 📚 Documentation
+## 📊 Output Files
 
-- `manual.pdf`: How to use the project
-- `replication.pdf`: Step-by-step experiment replication
-- `requirements.pdf`: Dependency explanations
+- `pytorch_BERT.csv`: BERT model evaluation (average of 10 runs)
+- `pytorch_NB.csv`: Naive Bayes results
+- `pytorch_BERT_sensitivity.csv`: Results from sensitivity testing
 
 ---
 
-## 🧠 Credits
+## 🔧 Configuration Options
 
-Created for the **Intelligent Software Engineering** module  
-University of Birmingham
+You can modify parameters directly in `BERT.py`, such as:
+
+```python
+model_name = 'bert-base-uncased'  # You can change to 'bert-base-cased', etc.
+REPEAT = 10                       # Number of repeated train/test splits
+```
+
+---
+
+## 📦 Requirements
+
+Installed via `requirements.txt`:
+
+```
+pandas==2.2.3
+numpy==2.1.3
+torch==2.5.1
+scikit-learn==1.6.0
+transformers==4.49.0
+tokenizers==0.21.0
+tqdm==4.67.1
+nltk==3.9.1
+```
+
+---
+
+## 🧪 Replication Instructions
+
+To replicate all results as shown in the report:
+
+1. Install dependencies  
+2. Run all three scripts (`BERT.py`, `NB+TF-IDF.py`, and `Sensitivity Analysis of Parameters.py`)  
+3. Ensure `Title+Body.csv` is formatted correctly and in the root folder  
+4. Outputs will be automatically saved under the project folder
+
+More details in `replication.pdf`.
+
+---
+
+## 🧠 Notes
+
+- GPU is optional but recommended for BERT training
+- You may further expand the project with:
+  - Multi-class classification
+  - Multilingual models (e.g., `bert-base-chinese`)
+  - Web interface or deployment options
 
 ---
 
 ## 📬 Contact
 
-For any questions or suggestions, feel free to contact: `your.email@example.com`
+If you have any questions or feedback, feel free to reach out:  
+**Your Name** – `your.email@example.com`
+
+---
+
+Happy experimenting! 🧪
