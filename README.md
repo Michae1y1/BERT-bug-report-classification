@@ -150,11 +150,4 @@ More details in `replication.pdf`.
 
 ---
 
-## 📬 Contact
-
-If you have any questions or feedback, feel free to reach out:  
-**Your Name** – `your.email@example.com`
-
----
-
 Happy experimenting! 🧪
