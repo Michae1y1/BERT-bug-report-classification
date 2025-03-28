@@ -21,9 +21,9 @@ BERT/
 ├── manual.pdf                          # General user manual
 ├── replication.pdf                     # Full replication guide
 │
-├── README for NB+TF-IDF.md             # Markdown guide for NB+TF-IDF model
-├── datasets/                           # Additional datasets (if any)
-└── results/                            # Outputs from all models
+├── README .md                          # Markdown guide for this project
+├── datasets/                           # Folder for datasets 
+└── results/                            # Folders for data tested by the author  
 ```
 
 ---
