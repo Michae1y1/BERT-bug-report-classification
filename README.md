@@ -21,9 +21,9 @@ BERT/
 ├── manual.pdf                          # General user manual
 ├── replication.pdf                     # Full replication guide
 │
-├── README.md                           # Markdown guide for this project
-├── datasets/                           # Additional datasets (if any)
-└── results/                            # Outputs from all models
+├── README .md                          # Markdown guide for this project
+├── datasets/                           # Folder for datasets 
+└── results/                            # Folders for data tested by the author  
 ```
 
 ---
@@ -147,13 +147,6 @@ More details in `replication.pdf`.
   - Multi-class classification
   - Multilingual models (e.g., `bert-base-chinese`)
   - Web interface or deployment options
-
----
-
-## 📬 Contact
-
-If you have any questions or feedback, feel free to reach out:  
-**Your Name** – `your.email@example.com`
 
 ---
 
